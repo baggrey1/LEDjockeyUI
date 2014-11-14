@@ -7,7 +7,7 @@ var jockeyApp = angular.module('jockeyApp', [
   'jockeyServices',
 ]);
 
-jockeyApp.value('ledAPIURL', 'http://0.0.0.0:5000/');
+jockeyApp.value('ledAPIURL', 'http://192.168.1.12:5000/');
 
 jockeyApp.config(['$routeProvider', 
 	function($routeProvider) {
