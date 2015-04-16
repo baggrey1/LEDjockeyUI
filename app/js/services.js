@@ -9,4 +9,6 @@ jockeyServices.factory('command',['$resource', '$http',
     return $resource('easyCommand', {}, {
       query: {method:'GET', isArray:true}
     });
-  }]);
+  }
+ ]);
+

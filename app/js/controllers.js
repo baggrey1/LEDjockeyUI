@@ -4,9 +4,10 @@
 
 var jockeyControllers = angular.module('jockeyControllers', []);
 
-jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL',
-	function($scope, $http, ledAPIURL) {
-		$scope.ledAPIURL = ledAPIURL,
+jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL', '$websocket', 'bedroomURL',
+	function($scope, $http, ledAPIURL, $websocket, bedroomURL) {
+		$scope.ledAPIURL = ledAPIURL;
+		$scope.datastream = $websocket(bedroomURL + 'slider/');
 		$scope.states = [
 			{text:'LEDs on', button:'btn-primary', command:'on'},
 			{text:'LEDs off', button:'btn-default', command:'off'}
@@ -28,5 +29,52 @@ jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL',
 				params: {command: color}
 			});
 		};
+		$scope.bedroom_command = function(state) {
+			$http.get(bedroomURL+'state/', {
+				command: state
+			});
+		};
+		$scope.colors = [
+			{
+				'name': 'red', 'intensity':0, 'options': {
+					from: 0,
+					to: 255,
+					step: 1,
+					css: {
+						background: {"background-color": "silver"},
+						after: {"background-color":"red"},
+						pointer: {"background-color": "gray"}          
+					}
+				}
+			},
+			{
+				'name':'green', 'intensity':0, 'options': {
+					from: 0,
+					to: 255,
+					step: 1,
+					css: {
+						background: {"background-color": "silver"},
+						after: {"background-color":"green"},
+						pointer: {"background-color": "gray"}          
+					}
+				}			
+			},
+			{
+				'name':'blue', 'intensity':0, 'options': {
+					from: 0,
+					to: 255,
+					step: 1,
+					css: {
+						background: {"background-color": "silver"},
+						after: {"background-color":"blue"},
+						pointer: {"background-color": "gray"}          
+					}
+				}
+			}
+		];
+		$scope.watch('colors',function() {
+			$scope.datastream.send($scope.colors);			
+		})
 
-	}]);
+	}
+]);
