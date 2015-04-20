@@ -4,11 +4,11 @@
 
 var jockeyServices = angular.module('jockeyServices', ['ngResource']);
 
-jockeyServices.factory('command',['$resource', '$http',
-  function($resource,$http){
-    return $resource('easyCommand', {}, {
-      query: {method:'GET', isArray:true}
-    });
+jockeyServices.factory('socket',
+  function(socketFactory){
+    return socketFactory({
+    	ioSocket: io.connect('http://192.168.1.2/slider/')
+    	});
   }
- ]);
+ );
 

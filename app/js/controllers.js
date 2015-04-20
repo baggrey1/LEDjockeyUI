@@ -4,10 +4,9 @@
 
 var jockeyControllers = angular.module('jockeyControllers', []);
 
-jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL', '$websocket', 'bedroomURL',
-	function($scope, $http, ledAPIURL, $websocket, bedroomURL) {
+jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL', '$socket', 'bedroomURL',
+	function($scope, $http, ledAPIURL, $socket, bedroomURL) {
 		$scope.ledAPIURL = ledAPIURL;
-		$scope.datastream = $websocket(bedroomURL + 'slider/');
 		$scope.states = [
 			{text:'LEDs on', button:'btn-primary', command:'on'},
 			{text:'LEDs off', button:'btn-default', command:'off'}
@@ -31,7 +30,7 @@ jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL', '$web
 		};
 		$scope.bedroom_command = function(state) {
 			$http.get(bedroomURL+'state/', {
-				command: state
+				params:{command: state}
 			});
 		};
 		$scope.colors = [
@@ -72,9 +71,9 @@ jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL', '$web
 				}
 			}
 		];
-		$scope.watch('colors',function() {
-			$scope.datastream.send($scope.colors);			
-		})
+		$scope.$watch('colors',function() {
+			$socket.emit('json',$scope.colors);			
+		}, true);
 
 	}
 ]);
