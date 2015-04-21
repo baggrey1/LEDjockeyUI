@@ -20,7 +20,8 @@
 <p>Brian's room</p>
 <span ng-repeat="state in states"><button type="button" class="btn {{state.button}}" ng-click="bedroom_command(state.command)">{{state.text}}</button> </span>
 </div>
+<br><br>
 <div ng-repeat="color in colors">
-	<input ng-model="color.intensity" type="text" slider options="color.options" />
+	<div id="{{color.name}}" ui-slider="colorOptions" ng-model="color.intensity"></div>
 	<br>
 </div>

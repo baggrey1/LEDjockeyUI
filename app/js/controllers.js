@@ -34,46 +34,33 @@ jockeyControllers.controller('jockeyCtrl', ['$scope','$http', 'ledAPIURL', '$soc
 			});
 		};
 		$scope.colors = [
-			{
-				'name': 'red', 'intensity':0, 'options': {
-					from: 0,
-					to: 255,
-					step: 1,
-					css: {
-						background: {"background-color": "silver"},
-						after: {"background-color":"red"},
-						pointer: {"background-color": "gray"}          
-					}
-				}
-			},
-			{
-				'name':'green', 'intensity':0, 'options': {
-					from: 0,
-					to: 255,
-					step: 1,
-					css: {
-						background: {"background-color": "silver"},
-						after: {"background-color":"green"},
-						pointer: {"background-color": "gray"}          
-					}
-				}			
-			},
-			{
-				'name':'blue', 'intensity':0, 'options': {
-					from: 0,
-					to: 255,
-					step: 1,
-					css: {
-						background: {"background-color": "silver"},
-						after: {"background-color":"blue"},
-						pointer: {"background-color": "gray"}          
-					}
-				}
-			}
+			{'name': 'red', 'intensity':175},
+			{'name':'green', 'intensity':150},
+			{'name':'blue', 'intensity':140,}
 		];
+		
 		$scope.$watch('colors',function() {
 			$socket.emit('json',$scope.colors);			
 		}, true);
+
+		$scope.colorOptions = {
+			orientation: 'horizontal',
+			min: 0,
+			max: 255,
+			range: 'min'
+		}
+
+		$scope.colorpicker = {
+			red: 255,
+			green: 140,
+			blue: 60,
+			options: {
+				orientation: 'horizontal',
+				min: 0,
+				max: 255,
+				range: 'min',
+			}
+		};
 
 	}
 ]);

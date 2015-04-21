@@ -6,7 +6,8 @@ var jockeyApp = angular.module('jockeyApp', [
   'jockeyControllers',
   'jockeyServices',
   'ngSlider',
-  'ngSocket'
+  'ngSocket',
+  'ui.slider'
 ]);
 
 jockeyApp.value('ledAPIURL', 'http://192.168.1.15:5000/');
