@@ -11,7 +11,7 @@ var jockeyApp = angular.module('jockeyApp', [
 ]);
 
 jockeyApp.value('ledAPIURL', 'http://192.168.1.9:5000/');
-jockeyApp.value('bedroomURL', 'http://192.168.1.4:5000/');
+jockeyApp.value('bedroomURL', 'http://192.168.1.2:5000/');
 
 jockeyApp.config(['$routeProvider', '$socketProvider',
 	function($routeProvider, $socketProvider) {
@@ -24,5 +24,5 @@ jockeyApp.config(['$routeProvider', '$socketProvider',
   			redirectTo: '/control'
   		});
 
-      $socketProvider.setUrl("http://192.168.1.4:5000/");
+      $socketProvider.setUrl("http://192.168.1.2:5000/");
 	}]);
